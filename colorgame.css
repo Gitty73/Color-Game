@@ -1,0 +1,31 @@
+body{
+	background: #232323;
+}
+
+.square{
+	width: 30%;
+	padding-bottom: 30%;
+	float: left;
+	background: green;
+	margin: 1.66%;
+}
+
+#container{
+	margin: 0 auto;
+	max-width: 600px;
+}
+
+
+h1{
+	color: white;
+}
+
+#strip{
+	background: white;
+	height: 25px;
+	text-align: center;
+}
+ button{
+ 	padding-bottom: 3px;
+ 	padding-top: 3px;
+ }
