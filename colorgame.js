@@ -22,8 +22,10 @@ function setUpModeButtons(){
 	modeButton[i].addEventListener("click", function(){
 	modeButton[0].classList.remove("selected");
 	modeButton[1].classList.remove("selected");
+	modeButton[2].classList.remove("selected");
+	modeButton[3].classList.remove("selected");
 	this.classList.add("selected");
-	this.textContent === "Easy" ? numSquares = 3: numSquares = 6;
+	this.textContent === "Easy" ? numSquares = 3: this.textContent === "Medium" ? numSquares = 6: this.textContent === "Hard" ? numSquares = 12: numSquares = 15;
 	reset();
 	});	
 }
@@ -36,18 +38,23 @@ for (var i = 0; i < squareColor.length; i++){
 squareColor[i].addEventListener("click", function() {
 
 		clickedColor = this.style.backgroundColor;
-		if (clickedColor === colorPicked){
+
+		 if (clickedColor === colorPicked){
 
 			messageDisplay.textContent = "Correct Guess!";
-			resetButton.textContent = "Play Again!";
+			messageDisplay.classList.remove("wrong");
+			messageDisplay.classList.add("correct");
+			resetButton.textContent = "Play Again ?";
 				changeColors(clickedColor);
 				h1.style.backgroundColor = clickedColor;
 		}
 		else{
 			this.style.backgroundColor = "#232323";
 			messageDisplay.textContent = "Try Again!!!";
+			messageDisplay.classList.add("wrong");
+			messageDisplay.classList.remove("correct");
 		}
-});
+	});
 }
 }
 
@@ -58,14 +65,26 @@ function reset(){
 	resetButton.textContent = "New Colors";
 	messageDisplay.textContent = "";
 	for (var i = 0; i < squareColor.length; i++){
-		if (colors[i]){
+		if (colors[i] && colors.length === 15){
+			squareColor[i].classList.remove("mediumSquare");
+			squareColor[i].classList.add("smallSquare");
+			squareColor[i].style.display = "block";
+			squareColor[i].style.backgroundColor = colors[i];
+		} else if (colors[i] && colors.length === 12){
+			squareColor[i].classList.remove("smallSquare");
+			squareColor[i].classList.add("mediumSquare");
+			squareColor[i].style.display = "block";
+			squareColor[i].style.backgroundColor = colors[i];
+		} else if (colors[i]) {
+			squareColor[i].classList.remove("smallSquare");
+			squareColor[i].classList.remove("mediumSquare");
 			squareColor[i].style.display = "block";
 			squareColor[i].style.backgroundColor = colors[i];
 		} else {
 			squareColor[i].style.display = "none";
 		}
 	}
-	h1.style.backgroundColor = "steelblue";
+	h1.style.backgroundColor = "rgb(25, 166, 110)";
 }
 
 resetButton.addEventListener("click", function(){
